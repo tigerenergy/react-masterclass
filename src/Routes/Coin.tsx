@@ -1,12 +1,10 @@
-import { useParams } from "react-router"
+import { useParams } from 'react-router'
 
-interface RouteParams 
-{
+interface RouteParams {
   coinId: string
 }
 
-function Coin() 
-{
+function Coin() {
   const { coinId } = useParams<RouteParams>()
   return <h1>Coin: {coinId}</h1>
 }
