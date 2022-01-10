@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components'
-import Router from './Router'
 import Coins from './Routes/Coins'
 
 
@@ -82,7 +81,6 @@ function App()
     <>
     <GlobalStyle />
     <Coins />
-    <Router />
     </>
   )
 }
