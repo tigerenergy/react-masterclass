@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
-import { StaticRouter } from "react-router";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -23,12 +22,12 @@ const Coin = styled.li`
   color: ${(props) => props.theme.bgColor};
   border-radius: 15px;
   margin-bottom: 10px;
-  height: 5vh;
   text-align: center;
   a {
-    padding: 20px;
     transition: color 0.2s ease-in;
     display: block;
+    display: flex;
+    align-items: center;
   }
   &:hover {
     a {
@@ -44,13 +43,14 @@ const Title = styled.h1`
 
 const Loader = styled.div
 `
-text-align: center;
+  text-align: center;
 `
 
 const Img = styled.img
 `
-  width: 25px;
-  height 25px;
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
 `
 
 interface CoinInterface
@@ -80,24 +80,30 @@ function Coins()
   },[])
   return (
     <Container>
-      <Header>
-        <Title>코인</Title>
-      </Header>
-      {loading ? (
-        <Loader>Loading...</Loader>
-      ) : (
-        <CoinsList>
-          {coins.map((coin) => (
+    <Header>
+      <Title>Coins</Title>
+    </Header>
+    {loading ? (
+      <Loader>Loading...</Loader>
+    ) : (
+      <CoinsList>
+         {coins.map((coin) => (
             <Coin key={coin.id}>
-              <StaticRouter>
-                <Img src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLocaleUpperCase}`}/>
-              <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
-              </StaticRouter>
+              <Link
+                to={{
+                  pathname: `/${coin.id}`,
+                  state: { name: coin.name },
+                }}
+              >
+                <Img
+                  src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}/>
+                {coin.name} &rarr;
+              </Link>
             </Coin>
           ))}
         </CoinsList>
       )}
     </Container>
-  );
+  )
 }
-export default Coins
+export default Coins;
