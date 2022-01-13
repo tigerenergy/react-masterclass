@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import Coins from './Routes/Coins'
 import Router from "./Router";
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 const GlobalStyle = createGlobalStyle
 `
@@ -81,6 +82,7 @@ function App()
     <>
     <GlobalStyle />
     <Router />
+    <ReactQueryDevtools initialIsOpen={true}  />
     </>
   )
 }
